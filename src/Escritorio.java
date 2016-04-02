@@ -1,14 +1,18 @@
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import modelos.Proceso;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by giuseppe on 21/03/16.
@@ -38,6 +42,7 @@ public class Escritorio extends JFrame {
     private JLabel Jlabelcpu,Jlabelram,Jlabelhdd;
     private JButton Bdisco;
     private ArrayList<Proceso> lista_procesos;
+    private DefaultTableModel tableModel;
 
     public Escritorio (){
 
@@ -125,10 +130,41 @@ public class Escritorio extends JFrame {
         Object rowData[][] = { { "Row1-Column1", "Row1-Column2", "Row1-Column3","Row1-Column4","Row1-column5","Row1-column6","Row1-column7" },
                 { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4", "Row2-Column5", "Row2-Column6", "Row2-Column7" } };
         lista_procesos =  LlenarTabla();
-        Object columnNames[] = { "ID Proceso", "Nombre", "Memoria","Quantum","Prioridad","ID_padre","tiempo"};
+        Object columnNames[] = { "ID Proceso", "Nombre", "Memoria","Quantum","Prioridad","ID_padre","Estado","tiempo"};
 
+        JButtonAndroid.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(JButtonAndroid, "Se ha iniciado el proceso <Android Studio>.");
+                Proceso android_studio_p = new Proceso(2000,3,700,100,"Android Studio","nuevo");
+                lista_procesos.add(android_studio_p);
+                ingresar(android_studio_p);
+            }
+        });
 
-        DefaultTableModel tableModel = new DefaultTableModel(columnNames,0);
+        JButtonGenymotion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(JButtonGenymotion, "Se ha iniciado el proceso <GenyMotion>.");
+                Proceso genymotion_p = new Proceso(2010,3,500,75,"Genymotion","nuevo");
+                lista_procesos.add(genymotion_p);
+                ingresar(genymotion_p);
+            }
+        });
+
+        JButtonFirefox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO hacer que el id proceso sea aleatorio para que no se repita utilizar libreria shuffle
+                JOptionPane.showMessageDialog(JButtonFirefox, "Se ha iniciado el proceso <Firefox>.");
+                Proceso firefox_p = new Proceso(2015,3,350,50,"Firefox","nuevo");
+                lista_procesos.add(firefox_p);
+                ingresar(firefox_p);
+            }
+        });
+
+        tableModel = new DefaultTableModel(columnNames,0);
+
         for (int i = 0; i < lista_procesos.size(); i++){
             int id = lista_procesos.get(i).getId();
             int prioridad = lista_procesos.get(i).getPrioridad();
@@ -162,6 +198,76 @@ public class Escritorio extends JFrame {
          JPanel panel_botones = new JPanel();
         panel_botones.setLayout(new GridLayout(1,5,1,1));
 
+        BIniciar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String proceso_nombre = JOptionPane.showInputDialog(BIniciar,"Inserte nombre del proceso");
+                String proceso_memoria = JOptionPane.showInputDialog(BIniciar,"Inserte cantidad de memoria");
+                String proceso_quantum = JOptionPane.showInputDialog(BIniciar,"Inserte Quantum");
+                float proceso_memoria_float = Float.parseFloat(proceso_memoria);
+                float proceso_quantum_float= Float.parseFloat(proceso_quantum);
+                Random rand = new Random();
+                int randomNum = rand.nextInt((3000 - 2000) + 1) + 2000;
+
+                Proceso proceso_iniciado = new Proceso(randomNum,3,proceso_memoria_float,proceso_quantum_float,proceso_nombre,"nuevo");
+                lista_procesos.add(proceso_iniciado);
+                ingresar(proceso_iniciado);
+
+                Thread hilo = new Thread();
+                try {
+                    //TODO crear un metodo que remueva el hilo con ese id y luego lo agregue con otro estado hacer lo mismo para los botones
+                    hilo.sleep(10000);
+                    proceso_iniciado.setEstado("listo");
+                    lista_procesos.add(proceso_iniciado);
+                    ingresar(proceso_iniciado);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
+
+
+            }
+        });
+
+        BMatar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Integer id_proceso = Integer.valueOf(JOptionPane.showInputDialog("Ingrese el ID del proceso"));
+                MatarProcesos(id_proceso);
+            }
+        });
+
+        BBloquear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Integer id_proceso = Integer.valueOf(JOptionPane.showInputDialog("Ingrese el ID del proceso"));
+                BloquearProceso(id_proceso);
+            }
+        });
+
+        BAlgoritmos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] options = new String[] {"FIFO", "RoundRObin", "Scan", "CSCAN"};
+                int response = JOptionPane.showOptionDialog(null, "Message", "Title",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                        null, options, options[0]);
+                if(response == 0){
+                    System.out.println("Opcion FIFO");
+                }
+                else if(response == 1){
+                    System.out.println("Opcion RoundRobin");
+                }
+                else if(response == 2){
+                    System.out.println("Opcion SCAN");
+                }
+                else if(response == 3){
+                    System.out.println("Opcion CSCAN");
+                }
+                else{
+                    System.out.println("Se cerro el dialog o algo inesperado ha ocurrido :( ");
+                }
+            }
+        });
         panel_botones.add(BIniciar);
         panel_botones.add(BMatar);
         panel_botones.add(BBloquear);
@@ -325,16 +431,105 @@ public class Escritorio extends JFrame {
 
     }
 
+    private void BloquearProceso(Integer id_proceso) {
+        for (int i = 0; i < lista_procesos.size(); i++){
+            int id = lista_procesos.get(i).getId();
+            int prioridad = lista_procesos.get(i).getPrioridad();
+            float memoria = lista_procesos.get(i).getMemoria();
+            float quantum = lista_procesos.get(i).getQuantum();
+            String nombre = lista_procesos.get(i).getNombre();
+            String estado = lista_procesos.get(i).getEstado();
+
+            if (id_proceso == id){
+
+            lista_procesos.get(i).setEstado("Bloqueado");
+                JOptionPane.showMessageDialog(BMatar,
+                        "Bloqueando proceso.",
+                        "BLoqueando proceso",
+                        JOptionPane.WARNING_MESSAGE);
+                Thread hilo = new Thread();
+
+                try {
+                    hilo.sleep(5000);
+                    System.out.println("Se ha Bloqueado el objeto: " +id);
+                    table.setValueAt("Bloqueado",i,6);
+                    //TODO hacer que vuelva a cargar la lista en el tablemodel con el objeto que se modifico
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+            else{
+                System.out.println("Los ID no coinciden id_proceso: " +id_proceso +" id: "+id);
+                if (i == lista_procesos.size()){
+                    JOptionPane.showMessageDialog(BMatar,"No se ha encontrado un proceso con ese ID");
+                }
+            }
+        }
+
+    }
+
+    private void MatarProcesos(Integer id_proceso) {
+
+        for (int i = 0; i < lista_procesos.size(); i++){
+            int id = lista_procesos.get(i).getId();
+
+            if (id_proceso == id){
+                JOptionPane.showMessageDialog(BMatar,
+                        "Eliminando proceso por favor espere.",
+                        "Eliminando procesos",
+                        JOptionPane.WARNING_MESSAGE);
+                Thread hilo = new Thread();
+
+                try {
+                    hilo.sleep(5000);
+                    lista_procesos.remove(lista_procesos.get(i));
+                    System.out.println("Se ha removido el objeto: " +id);
+                    tableModel.removeRow(i);
+                    table.setModel(tableModel);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+//                lista_procesos.remove(lista_procesos.get(i));
+//                System.out.println("Se ha removido el objeto: " +id);
+//                tableModel.removeRow(i);
+//                table.setModel(tableModel);
+            }
+            else{
+                System.out.println("Los ID no coinciden id_proceso: " +id_proceso +" id: "+id);
+                if (i == lista_procesos.size()){
+                    JOptionPane.showMessageDialog(BMatar,"No se ha encontrado un proceso con ese ID");
+                }
+            }
+        }
+
+    }
+
+    private void ingresar(Proceso proceso_nuevo) {
+        int id = proceso_nuevo.getId();
+        int prioridad = proceso_nuevo.getPrioridad();
+        float memoria = proceso_nuevo.getMemoria();
+        float quantum = proceso_nuevo.getQuantum();
+        String nombre = proceso_nuevo.getNombre();
+        String estado = proceso_nuevo.getEstado();
+
+        Object[] data = {id,nombre,memoria,quantum,prioridad,"",estado,0};
+        tableModel.addRow(data);
+        table.setModel(tableModel);
+    }
+
     private ArrayList<Proceso> LlenarTabla() {
         ArrayList<Proceso> Procesos = new ArrayList<Proceso>();
-        Procesos.add(new Proceso(1,1,15,20,"Proceso de inicio","activo"));
-        Procesos.add(new Proceso(2,1,15,20,"Proceso del panel","activo"));
-        Procesos.add(new Proceso(3,3,15,20,"Dropbox","activo"));
-        Procesos.add(new Proceso(4,3,15,20,"Skype","activo"));
-        Procesos.add(new Proceso(5,1,15,20,"Administrador de volumen","activo"));
-        Procesos.add(new Proceso(6,1,15,20,"Administrador de archivos","activo"));
-        Procesos.add(new Proceso(7,1,15,20,"Administrador de red","activo"));
-        Procesos.add(new Proceso(8,3,15,20,"MegaSync","activo"));
+        Procesos.add(new Proceso(1,1,15,20,"Proceso de inicio","nuevo"));
+        Procesos.add(new Proceso(2,1,15,20,"Proceso del panel","nuevo"));
+        Procesos.add(new Proceso(3,3,15,20,"Dropbox","nuevo"));
+        Procesos.add(new Proceso(4,3,15,20,"Skype","nuevo"));
+        Procesos.add(new Proceso(5,1,15,20,"Administrador de volumen","nuevo"));
+        Procesos.add(new Proceso(6,1,15,20,"Administrador de archivos","nuevo"));
+        Procesos.add(new Proceso(7,1,15,20,"Administrador de red","nuevo"));
+        Procesos.add(new Proceso(8,3,15,20,"MegaSync","nuevo"));
 
         return Procesos;
     }
