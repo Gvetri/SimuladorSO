@@ -43,6 +43,7 @@ public class Escritorio extends JFrame {
     private JButton Bdisco;
     private ArrayList<Proceso> lista_procesos;
     private DefaultTableModel tableModel;
+    private Thread hilo_proceso = new Thread();
 
     public Escritorio (){
 
@@ -216,7 +217,7 @@ public class Escritorio extends JFrame {
                 Thread hilo = new Thread();
                 try {
                     //TODO crear un metodo que remueva el hilo con ese id y luego lo agregue con otro estado hacer lo mismo para los botones
-                    hilo.sleep(10000);
+                    Thread.sleep(10000);
                     proceso_iniciado.setEstado("listo");
                     lista_procesos.add(proceso_iniciado);
                     ingresar(proceso_iniciado);
@@ -253,6 +254,7 @@ public class Escritorio extends JFrame {
                         null, options, options[0]);
                 if(response == 0){
                     System.out.println("Opcion FIFO");
+                    Fifo();
                 }
                 else if(response == 1){
                     System.out.println("Opcion RoundRobin");
@@ -431,6 +433,37 @@ public class Escritorio extends JFrame {
 
     }
 
+    private void Fifo() {
+        for (int i = 0; i < lista_procesos.size(); i++){
+            lista_procesos.get(i).setEstado("listo");
+            table.setValueAt("listo",i,6);
+        }
+
+        hilo_proceso = new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    for (int j = 0; j < lista_procesos.size(); j++) {
+
+                        lista_procesos.get(j).setEstado("terminado");
+                        table.setValueAt("terminado",j,6);
+                        tableModel.fireTableDataChanged();
+                        try {
+                            hilo_proceso.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                }
+            });
+
+            hilo_proceso.start();
+
+
+    }
+
     private void BloquearProceso(Integer id_proceso) {
         for (int i = 0; i < lista_procesos.size(); i++){
             int id = lista_procesos.get(i).getId();
@@ -450,7 +483,7 @@ public class Escritorio extends JFrame {
                 Thread hilo = new Thread();
 
                 try {
-                    hilo.sleep(5000);
+                    Thread.sleep(5000);
                     System.out.println("Se ha Bloqueado el objeto: " +id);
                     table.setValueAt("Bloqueado",i,6);
                     //TODO hacer que vuelva a cargar la lista en el tablemodel con el objeto que se modifico
@@ -483,7 +516,7 @@ public class Escritorio extends JFrame {
                 Thread hilo = new Thread();
 
                 try {
-                    hilo.sleep(5000);
+                    Thread.sleep(5000);
                     lista_procesos.remove(lista_procesos.get(i));
                     System.out.println("Se ha removido el objeto: " +id);
                     tableModel.removeRow(i);
