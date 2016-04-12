@@ -1,4 +1,6 @@
 import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
+import modelos.Celda;
+import modelos.DiscoFrame;
 import modelos.Proceso;
 
 import javax.imageio.ImageIO;
@@ -12,12 +14,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
  * Created by giuseppe on 21/03/16.
  */
 public class Escritorio extends JFrame {
+    private JPanel panel_disco;
     private JButton JButtonAndroid;
     private JLabel LAndroidstudio;
 
@@ -28,6 +32,7 @@ public class Escritorio extends JFrame {
     private JLabel JFirefox;
 
     private JPanel panel_procesos;
+    private DiscoFrame frame_disco = new DiscoFrame();
 
     private JTable table;
     private JScrollPane Jscroll;
@@ -42,8 +47,20 @@ public class Escritorio extends JFrame {
     private JLabel Jlabelcpu,Jlabelram,Jlabelhdd;
     private JButton Bdisco;
     private ArrayList<Proceso> lista_procesos;
-    private DefaultTableModel tableModel;
+    private DefaultTableModel tableModel,tableModel_disco;
     private Thread hilo_proceso = new Thread();
+    private Thread hilo_bloqueo = new Thread();
+    private Thread hilo_listo = new Thread();
+
+    //Elementos del panel de disco
+
+    private JPanel PMatriz;
+    private JTable PTable;
+    private JScrollPane PScrollpane;
+    private JLabel J1,J2,J3,J4,J5,J6,J7,J8,J9,J10,J11,J12,J13,J14,J15,J16,J17,J18,J19,J20,J21,J22,J23,J24,J25;
+    private ArrayList<Celda> lista_disco;
+    private Thread hilo_cscan;
+    private Integer bandera_salida = 0;
 
     public Escritorio (){
 
@@ -87,7 +104,20 @@ public class Escritorio extends JFrame {
         panel_procesos.setEnabled(true);
         panel_procesos.setBorder(BorderFactory.createEmptyBorder());
 
+        panel_disco = new JPanel();
+        panel_disco.setLayout(new GridLayout(3,1,3,3));
+        panel_disco.setEnabled(true);
+        panel_disco.setBorder(BorderFactory.createEmptyBorder());
+
+
         Rellenar_panel();
+        JLabel titulo = new JLabel("Disco Duro");
+        titulo.setHorizontalAlignment(SwingConstants.CENTER);
+        panel_disco.add(titulo);
+
+        Rellenar_panel_disco();
+
+
 
 
         //Declaracion para agregar elementos al JFrame
@@ -97,6 +127,7 @@ public class Escritorio extends JFrame {
         add(JButtonGenymotion);
         add(JButtonFirefox);
         add(panel_procesos);
+        add(panel_disco);
 
         //Declaracion para establecer los elementos dentro del JFrame
         JButtonAndroid.setBounds(50,50,128,128);
@@ -104,6 +135,10 @@ public class Escritorio extends JFrame {
         JButtonGenymotion.setBounds(50,300,128,128);
         JButtonFirefox.setBounds(50,500,128,128);
         panel_procesos.setBounds(800,50,500,600);
+
+        panel_disco.setBounds(250,50,500,400);
+
+
 
         //Establecer fondo
         try {
@@ -115,6 +150,325 @@ public class Escritorio extends JFrame {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+
+        AsignarLabels();
+
+    }
+
+    private void CScan() {
+         hilo_cscan = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i=0; i <= 25; i++){
+
+                    switch (i) {
+                        case 1:
+                            J25.setBackground(Color.green);
+                            J1.setBackground(Color.black);
+                            break;
+                        case 2:
+                            J1.setBackground(Color.green);
+                            J2.setBackground(Color.black);
+                            break;
+                        case 3:
+                            J2.setBackground(Color.green);
+                            J3.setBackground(Color.black);
+                            break;
+                        case 4:
+                            J3.setBackground(Color.green);
+                            J4.setBackground(Color.black);
+                            break;
+                        case 5:
+                            J4.setBackground(Color.green);
+                            J5.setBackground(Color.black);
+                            break;
+                        case 6:
+                            J5.setBackground(Color.green);
+                            J6.setBackground(Color.black);
+                            break;
+                        case 7:
+                            J6.setBackground(Color.green);
+                            J7.setBackground(Color.black);
+                            break;
+                        case 8:
+                            J7.setBackground(Color.green);
+                            J8.setBackground(Color.black);
+                            break;
+                        case 9:
+                            J8.setBackground(Color.green);
+                            J9.setBackground(Color.black);
+                            break;
+                        case 10:
+                            J9.setBackground(Color.green);
+                            J10.setBackground(Color.black);
+                            break;
+                        case 11:
+                            J10.setBackground(Color.green);
+                            J11.setBackground(Color.black);
+                            break;
+                        case 12:
+                            J11.setBackground(Color.green);
+                            J12.setBackground(Color.black);
+                            break;
+                        case 13:
+                            J12.setBackground(Color.green);
+                            J13.setBackground(Color.black);
+                            break;
+                        case 14:
+                            J13.setBackground(Color.green);
+                            J14.setBackground(Color.black);
+                            break;
+                        case 15:
+                            J14.setBackground(Color.green);
+                            J15.setBackground(Color.black);
+                            break;
+                        case 16:
+                            J15.setBackground(Color.green);
+                            J16.setBackground(Color.black);
+                            break;
+                        case 17:
+                            J16.setBackground(Color.green);
+                            J17.setBackground(Color.black);
+                            break;
+                        case 18:
+                            J17.setBackground(Color.green);
+                            J18.setBackground(Color.black);
+                            break;
+                        case 19:
+                            J18.setBackground(Color.green);
+                            J19.setBackground(Color.black);
+                            break;
+                        case 20:
+                            J19.setBackground(Color.green);
+                            J20.setBackground(Color.black);
+                            break;
+                        case 21:
+                            J20.setBackground(Color.green);
+                            J21.setBackground(Color.black);
+                            break;
+                        case 22:
+                            J21.setBackground(Color.green);
+                            J22.setBackground(Color.black);
+                            break;
+                        case 23:
+                            J22.setBackground(Color.green);
+                            J23.setBackground(Color.black);
+                            break;
+                        case 24:
+                            J23.setBackground(Color.green);
+                            J24.setBackground(Color.black);
+                            break;
+                        case 25:
+                            J24.setBackground(Color.green);
+                            J25.setBackground(Color.black);
+                            break;
+                        default:
+                            J1.setBackground(Color.black);
+                            break;
+                    }
+
+                    try {
+                        hilo_cscan.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (bandera_salida == 0){
+                    bandera_salida++;
+                    CScan();
+                }
+            }
+        });
+
+        hilo_cscan.start();
+    }
+
+    private void AsignarLabels() {
+        J1.setText(String.valueOf(lista_disco.get(0).getId_proceso()));
+        J2.setText(String.valueOf((lista_disco.get(1).getId_proceso())));
+        J3.setText(String.valueOf((lista_disco.get(2).getId_proceso())));
+        J4.setText(String.valueOf((lista_disco.get(3).getId_proceso())));
+        J5.setText(String.valueOf((lista_disco.get(4).getId_proceso())));
+        J6.setText(String.valueOf((lista_disco.get(5).getId_proceso())));
+        J7.setText(String.valueOf((lista_disco.get(6).getId_proceso())));
+        J8.setText(String.valueOf((lista_disco.get(7).getId_proceso())));
+        J9.setText(String.valueOf((lista_disco.get(8).getId_proceso())));
+        J10.setText(String.valueOf((lista_disco.get(9).getId_proceso())));
+        J11.setText(String.valueOf((lista_disco.get(10).getId_proceso())));
+        J12.setText(String.valueOf((lista_disco.get(11).getId_proceso())));
+        J13.setText(String.valueOf((lista_disco.get(12).getId_proceso())));
+        J14.setText(String.valueOf((lista_disco.get(13).getId_proceso())));
+        J15.setText(String.valueOf((lista_disco.get(14).getId_proceso())));
+        J16.setText(String.valueOf((lista_disco.get(15).getId_proceso())));
+        J17.setText(String.valueOf((lista_disco.get(16).getId_proceso())));
+        J18.setText(String.valueOf((lista_disco.get(17).getId_proceso())));
+        J19.setText(String.valueOf((lista_disco.get(18).getId_proceso())));
+        J20.setText(String.valueOf((lista_disco.get(19).getId_proceso())));
+        J21.setText(String.valueOf((lista_disco.get(20).getId_proceso())));
+        J22.setText(String.valueOf((lista_disco.get(21).getId_proceso())));
+        J23.setText(String.valueOf((lista_disco.get(22).getId_proceso())));
+        J24.setText(String.valueOf((lista_disco.get(23).getId_proceso())));
+        J25.setText(String.valueOf((lista_disco.get(24).getId_proceso())));
+
+
+
+
+    }
+
+    private void Rellenar_panel_disco() {
+        PMatriz = new JPanel(new GridLayout(5,5));
+        DeclararLabels_Disco();
+        DeclararTabla_Disco();
+        panel_disco.add(PMatriz);
+
+    }
+
+    private void  DeclararTabla_Disco() {
+        Object columnNamess[] = { "ID Celda", "Id Proceso "};
+        tableModel_disco = new DefaultTableModel(columnNamess,0);
+        lista_disco = LlenarTablaDisco();
+
+        for (int i = 0; i < lista_disco.size(); i++){
+            int id_celda = lista_disco.get(i).getId_celda();
+            int id_proceso = lista_disco.get(i).getId_proceso();
+
+            Object[] data_disco = {id_celda,id_proceso};
+            tableModel_disco.addRow(data_disco);
+        }
+        PTable = new JTable(tableModel_disco);
+        PScrollpane = new JScrollPane(PTable);
+        Dimension d = new Dimension(400,800);
+        PScrollpane.setMinimumSize(d);
+        PScrollpane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        panel_disco.add(PScrollpane);
+
+    }
+
+    private ArrayList<Celda> LlenarTablaDisco() {
+        ArrayList<Celda> lista_celda = new ArrayList<>();
+
+        for(int i = 0;i<25;i++){
+            Celda celda = new Celda(idrandom_celda(),idrandom_celda());
+            lista_celda.add(celda);
+            System.out.println("Creada celda ID celda: "+lista_celda.get(i).getId_celda()+"ID proceso: "+lista_celda.get(i).getId_proceso());
+        }
+        return lista_celda;
+    }
+
+    private int idrandom_celda() {
+        Random random = new Random();
+        Integer id_random = random.nextInt(25)+1;
+        return id_random;
+    }
+
+    private void DeclararLabels_Disco() {
+            J1 = new JLabel("holi");
+            J2 = new JLabel("2");
+            J3 = new JLabel("3");
+            J4 = new JLabel("4");
+            J5 = new JLabel("5");
+            J6 = new JLabel("6");
+            J7 = new JLabel("7");
+            J8 = new JLabel("8");
+            J9 = new JLabel("9");
+            J10 = new JLabel("sda");
+             J11 = new JLabel("asd");
+             J12 = new JLabel("s");
+             J13 = new JLabel("d");
+             J14 = new JLabel("4");
+             J15 = new JLabel("6");
+             J16 = new JLabel("4");
+             J17 = new JLabel("7");
+             J18 = new JLabel("2");
+             J19 = new JLabel("f");
+             J20 = new JLabel("t");
+             J21 = new JLabel("h");
+             J22 = new JLabel("j");
+             J23 = new JLabel("k");
+            J24 = new JLabel("w");
+            J25 = new JLabel("q");
+
+            J1.setBackground(Color.GREEN);
+            J2.setBackground(Color.GREEN);
+            J3.setBackground(Color.GREEN);
+            J4.setBackground(Color.GREEN);
+            J5.setBackground(Color.GREEN);
+            J6.setBackground(Color.GREEN);
+            J7.setBackground(Color.GREEN);
+            J8.setBackground(Color.GREEN);
+            J9.setBackground(Color.GREEN);
+            J10.setBackground(Color.GREEN);
+            J11.setBackground(Color.GREEN);
+            J12.setBackground(Color.GREEN);
+            J13.setBackground(Color.GREEN);
+            J14.setBackground(Color.GREEN);
+            J15.setBackground(Color.GREEN);
+            J16.setBackground(Color.GREEN);
+            J17.setBackground(Color.GREEN);
+            J18.setBackground(Color.GREEN);
+            J19.setBackground(Color.GREEN);
+            J20.setBackground(Color.GREEN);
+            J21.setBackground(Color.GREEN);
+            J22.setBackground(Color.GREEN);
+            J23.setBackground(Color.GREEN);
+            J24.setBackground(Color.GREEN);
+            J25.setBackground(Color.GREEN);
+
+            J1.setOpaque(true);
+            J2.setOpaque(true);
+            J3.setOpaque(true);
+            J4.setOpaque(true);
+            J5.setOpaque(true);
+            J6.setOpaque(true);
+            J7.setOpaque(true);
+            J8.setOpaque(true);
+            J9.setOpaque(true);
+            J10.setOpaque(true);
+            J11.setOpaque(true);
+            J12.setOpaque(true);
+            J13.setOpaque(true);
+            J14.setOpaque(true);
+            J15.setOpaque(true);
+            J16.setOpaque(true);
+            J17.setOpaque(true);
+            J18.setOpaque(true);
+            J19.setOpaque(true);
+            J20.setOpaque(true);
+            J21.setOpaque(true);
+            J22.setOpaque(true);
+            J23.setOpaque(true);
+            J24.setOpaque(true);
+            J25.setOpaque(true);
+
+
+
+            PMatriz.add(J1);
+            PMatriz.add(J2);
+            PMatriz.add(J3);
+            PMatriz.add(J4);
+            PMatriz.add(J5);
+            PMatriz.add(J6);
+            PMatriz.add(J7);
+            PMatriz.add(J8);
+            PMatriz.add(J9);
+            PMatriz.add(J10);
+            PMatriz.add(J11);
+            PMatriz.add(J12);
+            PMatriz.add(J13);
+            PMatriz.add(J14);
+            PMatriz.add(J15);
+            PMatriz.add(J16);
+            PMatriz.add(J17);
+            PMatriz.add(J18);
+            PMatriz.add(J19);
+            PMatriz.add(J20);
+            PMatriz.add(J21);
+            PMatriz.add(J22);
+            PMatriz.add(J23);
+            PMatriz.add(J24);
+            PMatriz.add(J25);
+
 
     }
 
@@ -128,16 +482,16 @@ public class Escritorio extends JFrame {
 
 
 
-        Object rowData[][] = { { "Row1-Column1", "Row1-Column2", "Row1-Column3","Row1-Column4","Row1-column5","Row1-column6","Row1-column7" },
-                { "Row2-Column1", "Row2-Column2", "Row2-Column3","Row2-Column4", "Row2-Column5", "Row2-Column6", "Row2-Column7" } };
         lista_procesos =  LlenarTabla();
-        Object columnNames[] = { "ID Proceso", "Nombre", "Memoria","Quantum","Prioridad","ID_padre","Estado","tiempo"};
+        Object columnNames[] = { "ID Proceso", "Nombre", "Memoria","Quantum","Prioridad","Tipo","Estado","tiempo","CPU"};
 
         JButtonAndroid.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(JButtonAndroid, "Se ha iniciado el proceso <Android Studio>.");
-                Proceso android_studio_p = new Proceso(2000,3,700,100,"Android Studio","nuevo");
+                Integer id_random = idrandom();
+                Float id_quantum = idquantum();
+                Proceso android_studio_p = new Proceso(id_random,3,"CPU",700,id_quantum,"Android Studio","nuevo",700);
                 lista_procesos.add(android_studio_p);
                 ingresar(android_studio_p);
             }
@@ -147,7 +501,9 @@ public class Escritorio extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(JButtonGenymotion, "Se ha iniciado el proceso <GenyMotion>.");
-                Proceso genymotion_p = new Proceso(2010,3,500,75,"Genymotion","nuevo");
+                Integer id_random = idrandom();
+                Float id_quantum = idquantum();
+                Proceso genymotion_p = new Proceso(id_random,3,"CPU",500,id_quantum,"Genymotion","nuevo",800);
                 lista_procesos.add(genymotion_p);
                 ingresar(genymotion_p);
             }
@@ -156,9 +512,10 @@ public class Escritorio extends JFrame {
         JButtonFirefox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO hacer que el id proceso sea aleatorio para que no se repita utilizar libreria shuffle
                 JOptionPane.showMessageDialog(JButtonFirefox, "Se ha iniciado el proceso <Firefox>.");
-                Proceso firefox_p = new Proceso(2015,3,350,50,"Firefox","nuevo");
+                Integer id_random = idrandom();
+                Float id_quantum = idquantum();
+                Proceso firefox_p = new Proceso(id_random,3,"CPU",350,id_quantum,"Firefox","nuevo",400);
                 lista_procesos.add(firefox_p);
                 ingresar(firefox_p);
             }
@@ -169,12 +526,14 @@ public class Escritorio extends JFrame {
         for (int i = 0; i < lista_procesos.size(); i++){
             int id = lista_procesos.get(i).getId();
             int prioridad = lista_procesos.get(i).getPrioridad();
+            String tipo_proceso = lista_procesos.get(i).gettipo_proceso();
             float memoria = lista_procesos.get(i).getMemoria();
             float quantum = lista_procesos.get(i).getQuantum();
             String nombre = lista_procesos.get(i).getNombre();
             String estado = lista_procesos.get(i).getEstado();
+            int cpu = lista_procesos.get(i).getCpu();
 
-            Object[] data = {id,nombre,memoria,quantum,prioridad,"",estado,0};
+            Object[] data = {id,nombre,memoria,quantum,prioridad,tipo_proceso,estado,0,cpu};
             tableModel.addRow(data);
         }
 
@@ -205,18 +564,18 @@ public class Escritorio extends JFrame {
                 String proceso_nombre = JOptionPane.showInputDialog(BIniciar,"Inserte nombre del proceso");
                 String proceso_memoria = JOptionPane.showInputDialog(BIniciar,"Inserte cantidad de memoria");
                 String proceso_quantum = JOptionPane.showInputDialog(BIniciar,"Inserte Quantum");
+                String proceso_cpu_s = JOptionPane.showInputDialog(BIniciar,"Inserte cantidad de CPU ");
                 float proceso_memoria_float = Float.parseFloat(proceso_memoria);
                 float proceso_quantum_float= Float.parseFloat(proceso_quantum);
-                Random rand = new Random();
-                int randomNum = rand.nextInt((3000 - 2000) + 1) + 2000;
+                Integer cpu = Integer.valueOf(proceso_cpu_s);
+                Integer id_random = idrandom();
 
-                Proceso proceso_iniciado = new Proceso(randomNum,3,proceso_memoria_float,proceso_quantum_float,proceso_nombre,"nuevo");
+                Proceso proceso_iniciado = new Proceso(id_random,3,"CPU",proceso_memoria_float,proceso_quantum_float,proceso_nombre,"nuevo",cpu);
                 lista_procesos.add(proceso_iniciado);
                 ingresar(proceso_iniciado);
 
                 Thread hilo = new Thread();
                 try {
-                    //TODO crear un metodo que remueva el hilo con ese id y luego lo agregue con otro estado hacer lo mismo para los botones
                     Thread.sleep(10000);
                     proceso_iniciado.setEstado("listo");
                     lista_procesos.add(proceso_iniciado);
@@ -248,7 +607,7 @@ public class Escritorio extends JFrame {
         BAlgoritmos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] options = new String[] {"FIFO", "RoundRObin", "Scan", "CSCAN"};
+                String[] options = new String[] {"FIFO", "RoundRobin", "Scan", "CSCAN"};
                 int response = JOptionPane.showOptionDialog(null, "Message", "Title",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
                         null, options, options[0]);
@@ -264,6 +623,7 @@ public class Escritorio extends JFrame {
                 }
                 else if(response == 3){
                     System.out.println("Opcion CSCAN");
+                    CScan();
                 }
                 else{
                     System.out.println("Se cerro el dialog o algo inesperado ha ocurrido :( ");
@@ -288,6 +648,8 @@ public class Escritorio extends JFrame {
         PBcpu.setToolTipText("CPU");
         PBcpu.setBorderPainted(false);
         PBcpu.setStringPainted(true);
+        PBcpu.setMaximum(2000);
+        PBcpu.setMinimum(0);
         PBcpu.setMaximumSize(new Dimension(3,10));
 
         PBdisco = new JProgressBar();
@@ -296,6 +658,8 @@ public class Escritorio extends JFrame {
         PBdisco.setToolTipText("Disco");
         PBdisco.setBorderPainted(false);
         PBdisco.setStringPainted(true);
+        PBdisco.setMaximum(32000);
+        PBdisco.setMinimum(0);
         PBdisco.setMaximumSize(new Dimension(3,10));
 
         PBram = new JProgressBar();
@@ -304,9 +668,11 @@ public class Escritorio extends JFrame {
         PBram.setToolTipText("Disco");
         PBram.setBorderPainted(false);
         PBram.setStringPainted(true);
+        PBram.setMaximum(4000);
+        PBram.setMinimum(0);
         PBdisco.setMaximumSize(new Dimension(3,10));
 
-
+        //TODO hacer funcionar las barras
         //Crea un panel de gridbag para los botones y luego agregarlo al panel anterior
         JPanel panel_barras = new JPanel();
         panel_barras.setLayout(new GridLayout(3,3,5,5));
@@ -434,26 +800,61 @@ public class Escritorio extends JFrame {
     }
 
     private void Fifo() {
-        for (int i = 0; i < lista_procesos.size(); i++){
-            lista_procesos.get(i).setEstado("listo");
-            table.setValueAt("listo",i,6);
-        }
 
         hilo_proceso = new Thread(new Runnable() {
                 @Override
                 public void run() {
 
-                    for (int j = 0; j < lista_procesos.size(); j++) {
 
-                        lista_procesos.get(j).setEstado("terminado");
-                        table.setValueAt("terminado",j,6);
-                        tableModel.fireTableDataChanged();
+                    for (int i = 0; i < lista_procesos.size(); i++){
+                        lista_procesos.get(i).setEstado("listo");
+                        table.setValueAt("listo",i,6);
+                        PBcpu.setValue(i);
+                        try {
+                            Thread.sleep(1500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                    for (int j = 0; j < lista_procesos.size(); j++) {
+                        PBcpu.setValue((int) lista_procesos.get(j).getCpu());
+                        PBram.setValue((int) lista_procesos.get(j).getMemoria());
+                        float quantum_inicial = lista_procesos.get(j).getQuantum();
+                        System.out.println("Valor del quantum inicial : " +quantum_inicial);
+                        float contador_quantum = quantum_inicial;
+                        while (contador_quantum != 0){
+                            System.out.println("Entro en el while");
+                            contador_quantum= contador_quantum - 1;
+                            lista_procesos.get(j).setQuantum(contador_quantum);
+                            table.setValueAt(contador_quantum, j, 3);
+                            try {
+                                hilo_proceso.sleep(500);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println("Valor del contador: " +contador_quantum);
+                        }
+
+                        if (lista_procesos.get(j).getPrioridad()!=1) {
+                            lista_procesos.get(j).setEstado("terminado");
+                            table.setValueAt("terminado", j, 6);
+                            tableModel.fireTableDataChanged();
+                        } else{
+                            lista_procesos.get(j).setQuantum(20);
+                            table.setValueAt(20, j, 3);
+                        }
                         try {
                             hilo_proceso.sleep(1000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
 
+
+                        if (j == lista_procesos.size()) {
+                            PBcpu.setValue(0);
+                        }
                     }
 
                 }
@@ -468,6 +869,7 @@ public class Escritorio extends JFrame {
         for (int i = 0; i < lista_procesos.size(); i++){
             int id = lista_procesos.get(i).getId();
             int prioridad = lista_procesos.get(i).getPrioridad();
+            String tipo_proceso = lista_procesos.get(i).gettipo_proceso();
             float memoria = lista_procesos.get(i).getMemoria();
             float quantum = lista_procesos.get(i).getQuantum();
             String nombre = lista_procesos.get(i).getNombre();
@@ -525,10 +927,6 @@ public class Escritorio extends JFrame {
                     e.printStackTrace();
                 }
 
-//                lista_procesos.remove(lista_procesos.get(i));
-//                System.out.println("Se ha removido el objeto: " +id);
-//                tableModel.removeRow(i);
-//                table.setModel(tableModel);
             }
             else{
                 System.out.println("Los ID no coinciden id_proceso: " +id_proceso +" id: "+id);
@@ -543,28 +941,63 @@ public class Escritorio extends JFrame {
     private void ingresar(Proceso proceso_nuevo) {
         int id = proceso_nuevo.getId();
         int prioridad = proceso_nuevo.getPrioridad();
+        String tipo_proceso = proceso_nuevo.gettipo_proceso();
         float memoria = proceso_nuevo.getMemoria();
         float quantum = proceso_nuevo.getQuantum();
         String nombre = proceso_nuevo.getNombre();
         String estado = proceso_nuevo.getEstado();
+        int cpu = proceso_nuevo.getCpu();
 
-        Object[] data = {id,nombre,memoria,quantum,prioridad,"",estado,0};
+        Object[] data = {id,nombre,memoria,quantum,prioridad,tipo_proceso,estado,0,cpu};
         tableModel.addRow(data);
         table.setModel(tableModel);
     }
 
     private ArrayList<Proceso> LlenarTabla() {
         ArrayList<Proceso> Procesos = new ArrayList<Proceso>();
-        Procesos.add(new Proceso(1,1,15,20,"Proceso de inicio","nuevo"));
-        Procesos.add(new Proceso(2,1,15,20,"Proceso del panel","nuevo"));
-        Procesos.add(new Proceso(3,3,15,20,"Dropbox","nuevo"));
-        Procesos.add(new Proceso(4,3,15,20,"Skype","nuevo"));
-        Procesos.add(new Proceso(5,1,15,20,"Administrador de volumen","nuevo"));
-        Procesos.add(new Proceso(6,1,15,20,"Administrador de archivos","nuevo"));
-        Procesos.add(new Proceso(7,1,15,20,"Administrador de red","nuevo"));
-        Procesos.add(new Proceso(8,3,15,20,"MegaSync","nuevo"));
-
+        Integer id_random = idrandom();
+        Float id_quantum = idquantum();
+        Procesos.add(new Proceso(id_random,1,"CPU",10,id_quantum,"Proceso de inicio","nuevo",30));
+        id_random = idrandom();
+        id_quantum = idquantum();
+        Procesos.add(new Proceso(id_random,1,"CPU",15,id_quantum,"Proceso del panel","nuevo",30));
+        id_random = idrandom();
+        id_quantum = idquantum();
+        Procesos.add(new Proceso(id_random,3,"CPU",15,id_quantum,"Dropbox","nuevo",100));
+        id_random = idrandom();
+        id_quantum = idquantum();
+        Procesos.add(new Proceso(id_random,3,"CPU",15,id_quantum,"Skype","nuevo",200));
+        id_random = idrandom();
+        id_quantum = idquantum();
+        Procesos.add(new Proceso(id_random,1,"E/S",15,id_quantum,"Administrador de volumen","nuevo",30));
+        id_random = idrandom();
+        id_quantum = idquantum();
+        Procesos.add(new Proceso(id_random,1,"CPU",15,id_quantum,"Administrador de archivos","nuevo",50));
+        id_random = idrandom();
+        id_quantum = idquantum();
+        Procesos.add(new Proceso(id_random,1,"E/S",15,id_quantum,"Administrador de red","nuevo",30));
+        id_random = idrandom();
+        id_quantum = idquantum();
+        Procesos.add(new Proceso(id_random,3,"CPU",15,id_quantum,"MegaSync","nuevo",60));
+        id_random = idrandom();
+        id_quantum = idquantum();
+        Procesos.add(new Proceso(id_random,1,"E/S",15,id_quantum,"Administrador de teclado","nuevo",20));
+        id_random = idrandom();
+        id_quantum = idquantum();
+        Procesos.add(new Proceso(id_random,3,"CPU",800,id_quantum,"Intellij IDEA 15.0.2","nuevo",400));
         return Procesos;
+    }
+
+    private Float idquantum() {
+        Random random = new Random();
+        Float id_quantum = Float.valueOf(random.nextInt(50)+1);
+        return id_quantum;
+    }
+
+    private Integer idrandom() {
+        Random random = new Random();
+        Integer id_random = random.nextInt(2000)+1;
+        return id_random;
     }
 
 }

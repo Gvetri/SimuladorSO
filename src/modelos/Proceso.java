@@ -3,10 +3,11 @@ package modelos;
 /**
  * Created by giuseppe on 26/03/16.
  */
+
 public class Proceso {
-    private int id,prioridad,id_padre;
+    private int id,prioridad,cpu;
     private float memoria,quantum;
-    private String nombre,estado;
+    private String nombre,estado,tipo_proceso;
 
     public Proceso(){
 
@@ -21,15 +22,28 @@ public class Proceso {
         this.estado = estado;
     }
 
-    public Proceso(int id, int prioridad, int id_padre, float memoria, float quantum, String nombre, String estado) {
+    public Proceso(int id, int prioridad, String tipo_proceso, float memoria, float quantum, String nombre, String estado) {
         this.id = id;
         this.prioridad = prioridad;
-        this.id_padre = id_padre;
+        this.tipo_proceso = tipo_proceso;
         this.memoria = memoria;
         this.quantum = quantum;
         this.nombre = nombre;
         this.estado = estado;
     }
+
+    public Proceso(int id, int prioridad, String tipo_proceso, float memoria, float quantum, String nombre, String estado,int cpu) {
+        this.id = id;
+        this.prioridad = prioridad;
+        this.tipo_proceso = tipo_proceso;
+        this.memoria = memoria;
+        this.quantum = quantum;
+        this.nombre = nombre;
+        this.estado = estado;
+        this.cpu = cpu;
+    }
+
+
 
     public int getId() {
         return id;
@@ -47,12 +61,12 @@ public class Proceso {
         this.prioridad = prioridad;
     }
 
-    public int getId_padre() {
-        return id_padre;
+    public String gettipo_proceso() {
+        return tipo_proceso;
     }
 
-    public void setId_padre(int id_padre) {
-        this.id_padre = id_padre;
+    public void settipo_proceso(String tipo_proceso) {
+        this.tipo_proceso = tipo_proceso;
     }
 
     public float getMemoria() {
@@ -85,5 +99,13 @@ public class Proceso {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public int getCpu() {
+        return cpu;
+    }
+
+    public void setCpu(int cpu) {
+        this.cpu = cpu;
     }
 }
