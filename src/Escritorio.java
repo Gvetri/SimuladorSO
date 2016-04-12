@@ -1,4 +1,3 @@
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import modelos.Celda;
 import modelos.DiscoFrame;
 import modelos.Proceso;
@@ -13,9 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by giuseppe on 21/03/16.
@@ -61,6 +58,8 @@ public class Escritorio extends JFrame {
     private ArrayList<Celda> lista_disco;
     private Thread hilo_cscan;
     private Integer bandera_salida = 0;
+    private Thread hilo_scan;
+    private int bTerminado;
 
     public Escritorio (){
 
@@ -278,6 +277,7 @@ public class Escritorio extends JFrame {
                     bandera_salida++;
                     CScan();
                 }
+
             }
         });
 
@@ -347,7 +347,7 @@ public class Escritorio extends JFrame {
 
     private ArrayList<Celda> LlenarTablaDisco() {
         ArrayList<Celda> lista_celda = new ArrayList<>();
-
+        //TODO hacer que los id de procesos de las celdas sean iguales a los de la lista procesos usando lista_procesos.get(i).getID
         for(int i = 0;i<25;i++){
             Celda celda = new Celda(idrandom_celda(),idrandom_celda());
             lista_celda.add(celda);
@@ -493,7 +493,7 @@ public class Escritorio extends JFrame {
                 Float id_quantum = idquantum();
                 Proceso android_studio_p = new Proceso(id_random,3,"CPU",700,id_quantum,"Android Studio","nuevo",700);
                 lista_procesos.add(android_studio_p);
-                ingresar(android_studio_p);
+                Ingresar(android_studio_p);
             }
         });
 
@@ -505,7 +505,7 @@ public class Escritorio extends JFrame {
                 Float id_quantum = idquantum();
                 Proceso genymotion_p = new Proceso(id_random,3,"CPU",500,id_quantum,"Genymotion","nuevo",800);
                 lista_procesos.add(genymotion_p);
-                ingresar(genymotion_p);
+                Ingresar(genymotion_p);
             }
         });
 
@@ -517,7 +517,7 @@ public class Escritorio extends JFrame {
                 Float id_quantum = idquantum();
                 Proceso firefox_p = new Proceso(id_random,3,"CPU",350,id_quantum,"Firefox","nuevo",400);
                 lista_procesos.add(firefox_p);
-                ingresar(firefox_p);
+                Ingresar(firefox_p);
             }
         });
 
@@ -572,14 +572,14 @@ public class Escritorio extends JFrame {
 
                 Proceso proceso_iniciado = new Proceso(id_random,3,"CPU",proceso_memoria_float,proceso_quantum_float,proceso_nombre,"nuevo",cpu);
                 lista_procesos.add(proceso_iniciado);
-                ingresar(proceso_iniciado);
+                Ingresar(proceso_iniciado);
 
                 Thread hilo = new Thread();
                 try {
                     Thread.sleep(10000);
                     proceso_iniciado.setEstado("listo");
                     lista_procesos.add(proceso_iniciado);
-                    ingresar(proceso_iniciado);
+                    Ingresar(proceso_iniciado);
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
@@ -617,9 +617,11 @@ public class Escritorio extends JFrame {
                 }
                 else if(response == 1){
                     System.out.println("Opcion RoundRobin");
+                    //TODO Implementar RoundRobin
                 }
                 else if(response == 2){
                     System.out.println("Opcion SCAN");
+                    Scan();
                 }
                 else if(response == 3){
                     System.out.println("Opcion CSCAN");
@@ -749,6 +751,14 @@ public class Escritorio extends JFrame {
         Jimg_monitor.setBorderPainted(false);
         Jimg_monitor.setFocusPainted(false);
         Jimg_monitor.setContentAreaFilled(false);
+        Jimg_monitor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Proceso proceso = new Proceso(idrandom(),1,"E/S", 15.00f, 23.00f,"Proceso Monitor","nuevo",3);
+                Ingresar(proceso);
+            }
+        });
+
 
 
         Jimg_impresora = new JButton(img_impresora);
@@ -756,33 +766,74 @@ public class Escritorio extends JFrame {
         Jimg_impresora.setBorderPainted(false);
         Jimg_impresora.setFocusPainted(false);
         Jimg_impresora.setContentAreaFilled(false);
+        Jimg_impresora.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Proceso proceso = new Proceso(idrandom(),1,"E/S", 15.00f, 23.00f,"Impresora","nuevo",3);
+                Ingresar(proceso);
+            }
+        });
 
         Jimg_keyboard = new JButton(img_keyboard);
         Jimg_keyboard.setBorder(BorderFactory.createEmptyBorder());
         Jimg_keyboard.setFocusPainted(false);
         Jimg_keyboard.setContentAreaFilled(false);
-
+        Jimg_keyboard.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Proceso proceso = new Proceso(idrandom(),1,"E/S", 15.00f, 23.00f,"Proceso Teclado","nuevo",3);
+                Ingresar(proceso);
+            }
+        });
 
         Jimg_music = new JButton(img_music);
         Jimg_music.setBorder(BorderFactory.createEmptyBorder());
         Jimg_music.setFocusPainted(false);
         Jimg_music.setContentAreaFilled(false);
+        Jimg_music.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Proceso proceso = new Proceso(idrandom(),1,"E/S", 15.00f, 23.00f,"Proceso multimedia","nuevo",3);
+                Ingresar(proceso);
+            }
+        });
 
         Jimg_mic = new JButton(img_mic);
         Jimg_mic.setBorder(BorderFactory.createEmptyBorder());
         Jimg_mic.setFocusPainted(false);
         Jimg_mic.setContentAreaFilled(false);
+        Jimg_mic.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Proceso proceso = new Proceso(idrandom(),1,"E/S", 15.00f, 23.00f,"Proceso Microfono","nuevo",3);
+                Ingresar(proceso);
+            }
+        });
 
 
         Jimg_mouse = new JButton(img_mouse);
         Jimg_mouse.setBorder(BorderFactory.createEmptyBorder());
         Jimg_mouse.setFocusPainted(false);
         Jimg_mouse.setContentAreaFilled(false);
+        Jimg_mouse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Proceso proceso = new Proceso(idrandom(),1,"E/S", 15.00f, 23.00f,"Proceso Mouse","nuevo",3);
+                Ingresar(proceso);
+            }
+        });
 
         Jimg_usb = new JButton(img_usb);
         Jimg_usb.setBorder(BorderFactory.createEmptyBorder());
         Jimg_usb.setFocusPainted(false);
         Jimg_usb.setContentAreaFilled(false);
+        Jimg_usb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Proceso proceso = new Proceso(idrandom(),1,"E/S", 15.00f, 23.00f,"USB","nuevo",3);
+                Ingresar(proceso);
+            }
+        });
 
         panel_imges.add(Jimg_monitor);
         panel_imges.add(Jimg_impresora);
@@ -796,6 +847,251 @@ public class Escritorio extends JFrame {
 
 
 
+
+    }
+
+    private void Scan() {
+        hilo_scan = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                for (int i=0; i <= 25; i++){
+
+                    switch (i) {
+                        case 1:
+                            J25.setBackground(Color.green);
+                            J1.setBackground(Color.black);
+                            break;
+                        case 2:
+                            J1.setBackground(Color.green);
+                            J2.setBackground(Color.black);
+                            break;
+                        case 3:
+                            J2.setBackground(Color.green);
+                            J3.setBackground(Color.black);
+                            break;
+                        case 4:
+                            J3.setBackground(Color.green);
+                            J4.setBackground(Color.black);
+                            break;
+                        case 5:
+                            J4.setBackground(Color.green);
+                            J5.setBackground(Color.black);
+                            break;
+                        case 6:
+                            J5.setBackground(Color.green);
+                            J6.setBackground(Color.black);
+                            break;
+                        case 7:
+                            J6.setBackground(Color.green);
+                            J7.setBackground(Color.black);
+                            break;
+                        case 8:
+                            J7.setBackground(Color.green);
+                            J8.setBackground(Color.black);
+                            break;
+                        case 9:
+                            J8.setBackground(Color.green);
+                            J9.setBackground(Color.black);
+                            break;
+                        case 10:
+                            J9.setBackground(Color.green);
+                            J10.setBackground(Color.black);
+                            break;
+                        case 11:
+                            J10.setBackground(Color.green);
+                            J11.setBackground(Color.black);
+                            break;
+                        case 12:
+                            J11.setBackground(Color.green);
+                            J12.setBackground(Color.black);
+                            break;
+                        case 13:
+                            J12.setBackground(Color.green);
+                            J13.setBackground(Color.black);
+                            break;
+                        case 14:
+                            J13.setBackground(Color.green);
+                            J14.setBackground(Color.black);
+                            break;
+                        case 15:
+                            J14.setBackground(Color.green);
+                            J15.setBackground(Color.black);
+                            break;
+                        case 16:
+                            J15.setBackground(Color.green);
+                            J16.setBackground(Color.black);
+                            break;
+                        case 17:
+                            J16.setBackground(Color.green);
+                            J17.setBackground(Color.black);
+                            break;
+                        case 18:
+                            J17.setBackground(Color.green);
+                            J18.setBackground(Color.black);
+                            break;
+                        case 19:
+                            J18.setBackground(Color.green);
+                            J19.setBackground(Color.black);
+                            break;
+                        case 20:
+                            J19.setBackground(Color.green);
+                            J20.setBackground(Color.black);
+                            break;
+                        case 21:
+                            J20.setBackground(Color.green);
+                            J21.setBackground(Color.black);
+                            break;
+                        case 22:
+                            J21.setBackground(Color.green);
+                            J22.setBackground(Color.black);
+                            break;
+                        case 23:
+                            J22.setBackground(Color.green);
+                            J23.setBackground(Color.black);
+                            break;
+                        case 24:
+                            J23.setBackground(Color.green);
+                            J24.setBackground(Color.black);
+                            break;
+                        case 25:
+                            J24.setBackground(Color.green);
+                            J25.setBackground(Color.black);
+                            break;
+                        default:
+                            J1.setBackground(Color.black);
+                            break;
+                    }
+
+                    try {
+                        hilo_scan.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+
+                for (int i=25; i <= 25; i--){
+
+                    switch (i) {
+                        case 1:
+                            J25.setBackground(Color.green);
+                            J2.setBackground(Color.green);
+                            J1.setBackground(Color.black);
+                            break;
+                        case 2:
+                            J3.setBackground(Color.green);
+                            J2.setBackground(Color.black);
+                            break;
+                        case 3:
+                            J4.setBackground(Color.green);
+                            J3.setBackground(Color.black);
+                            break;
+                        case 4:
+                            J5.setBackground(Color.green);
+                            J4.setBackground(Color.black);
+                            break;
+                        case 5:
+                            J6.setBackground(Color.green);
+                            J5.setBackground(Color.black);
+                            break;
+                        case 6:
+                            J7.setBackground(Color.green);
+                            J6.setBackground(Color.black);
+                            break;
+                        case 7:
+                            J8.setBackground(Color.green);
+                            J7.setBackground(Color.black);
+                            break;
+                        case 8:
+                            J9.setBackground(Color.green);
+                            J8.setBackground(Color.black);
+                            break;
+                        case 9:
+                            J10.setBackground(Color.green);
+                            J9.setBackground(Color.black);
+                            break;
+                        case 10:
+                            J11.setBackground(Color.green);
+                            J10.setBackground(Color.black);
+                            break;
+                        case 11:
+                            J12.setBackground(Color.green);
+                            J11.setBackground(Color.black);
+                            break;
+                        case 12:
+                            J13.setBackground(Color.green);
+                            J12.setBackground(Color.black);
+                            break;
+                        case 13:
+                            J14.setBackground(Color.green);
+                            J13.setBackground(Color.black);
+                            break;
+                        case 14:
+                            J15.setBackground(Color.green);
+                            J14.setBackground(Color.black);
+                            break;
+                        case 15:
+                            J16.setBackground(Color.green);
+                            J15.setBackground(Color.black);
+                            break;
+                        case 16:
+                            J17.setBackground(Color.green);
+                            J16.setBackground(Color.black);
+                            break;
+                        case 17:
+                            J18.setBackground(Color.green);
+                            J17.setBackground(Color.black);
+                            break;
+                        case 18:
+                            J19.setBackground(Color.green);
+                            J18.setBackground(Color.black);
+                            break;
+                        case 19:
+                            J20.setBackground(Color.green);
+                            J19.setBackground(Color.black);
+                            break;
+                        case 20:
+                            J21.setBackground(Color.green);
+                            J20.setBackground(Color.black);
+                            break;
+                        case 21:
+                            J22.setBackground(Color.green);
+                            J21.setBackground(Color.black);
+                            break;
+                        case 22:
+                            J23.setBackground(Color.green);
+                            J22.setBackground(Color.black);
+                            break;
+                        case 23:
+                            J24.setBackground(Color.green);
+                            J23.setBackground(Color.black);
+                            break;
+                        case 24:
+                            J25.setBackground(Color.green);
+                            J24.setBackground(Color.black);
+                            break;
+                        case 25:
+                            J24.setBackground(Color.green);
+                            J25.setBackground(Color.black);
+                            break;
+                        default:
+                            J1.setBackground(Color.black);
+                            break;
+                    }
+
+                    try {
+                        hilo_scan.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+        });
+
+        hilo_scan.start();
 
     }
 
@@ -938,7 +1234,8 @@ public class Escritorio extends JFrame {
 
     }
 
-    private void ingresar(Proceso proceso_nuevo) {
+    private void Ingresar(Proceso proceso_nuevo) {
+        lista_procesos.add(proceso_nuevo);
         int id = proceso_nuevo.getId();
         int prioridad = proceso_nuevo.getPrioridad();
         String tipo_proceso = proceso_nuevo.gettipo_proceso();

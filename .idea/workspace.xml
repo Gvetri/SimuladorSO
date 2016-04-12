@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/Escritorio.java" line="135" mnemonic="4" />
+    <bookmark url="file://$PROJECT_DIR$/src/Escritorio.java" line="134" mnemonic="4" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d59335b-90c8-4002-987b-55a195336034" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/modelos/Celda.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/modelos/DiscoFrame.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Escritorio.java" afterPath="$PROJECT_DIR$/src/Escritorio.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modelos/Proceso.java" afterPath="$PROJECT_DIR$/src/modelos/Proceso.java" />
     </list>
     <ignored path="Simulador_So.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,20 +56,31 @@
       <file leaf-file-name="Escritorio.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Escritorio.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.069587626">
-              <caret line="157" column="25" selection-start-line="157" selection-start-column="25" selection-end-line="157" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.23776224">
+              <caret line="1237" column="42" selection-start-line="1237" selection-start-column="42" selection-end-line="1237" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#CScan#0;class#Escritorio#0" expanded="false" />
-                <element signature="e#5333#10671#0" expanded="true" />
-                <element signature="e#10670#10671#0" expanded="true" />
-                <element signature="method#AsignarLabels#0;class#Escritorio#0" expanded="false" />
-                <element signature="method#DeclararTabla_Disco#0;class#Escritorio#0" expanded="false" />
-                <element signature="method#DeclararLabels_Disco#0;class#Escritorio#0" expanded="false" />
+                <element signature="e#5259#10598#0" expanded="true" />
+                <element signature="e#10597#10598#0" expanded="true" />
+                <element signature="e#29435#29706#0" expanded="true" />
+                <element signature="e#29705#29706#0" expanded="true" />
+                <element signature="e#30022#30287#0" expanded="true" />
+                <element signature="e#30286#30287#0" expanded="true" />
+                <element signature="e#30547#30818#0" expanded="true" />
+                <element signature="e#30817#30818#0" expanded="true" />
+                <element signature="e#31060#31334#0" expanded="true" />
+                <element signature="e#31333#31334#0" expanded="true" />
+                <element signature="e#31564#31837#0" expanded="true" />
+                <element signature="e#31836#31837#0" expanded="true" />
+                <element signature="e#32080#32349#0" expanded="true" />
+                <element signature="e#32348#32349#0" expanded="true" />
+                <element signature="e#32579#32838#0" expanded="true" />
+                <element signature="e#32837#32838#0" expanded="true" />
+                <element signature="e#33216#43607#0" expanded="true" />
+                <element signature="e#43606#43607#0" expanded="true" />
                 <element signature="method#Fifo#0;class#Escritorio#0" expanded="false" />
                 <element signature="method#BloquearProceso#0;class#Escritorio#0" expanded="false" />
                 <element signature="method#MatarProcesos#0;class#Escritorio#0" expanded="false" />
-                <element signature="method#ingresar#0;class#Escritorio#0" expanded="false" />
                 <element signature="method#idquantum#0;class#Escritorio#0" expanded="false" />
               </folding>
             </state>
@@ -675,7 +683,7 @@
       <workItem from="1459709694078" duration="11539000" />
       <workItem from="1459822195098" duration="6360000" />
       <workItem from="1460320715672" duration="18872000" />
-      <workItem from="1460424739365" duration="6889000" />
+      <workItem from="1460424739365" duration="10308000" />
     </task>
     <task id="LOCAL-00001" summary="Finalizada la interfaz grafica agregada la clase modelo e incluidos los procesos predeterminados para el simulador.">
       <created>1459398862390</created>
@@ -695,11 +703,17 @@
       <option name="project" value="LOCAL" />
       <updated>1459826736542</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Acomodado el FIFO, modificada la clase Proceso agregado el modulo de discuro duro y el CSCAN">
+      <created>1460432868043</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1460432868043</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147376000" />
+    <option name="totallyTimeSpent" value="150795000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -727,10 +741,10 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.83094096" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32854864" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32854864" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27190334" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27190334" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43806645" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29346094" sideWeight="0.48826292" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29346094" sideWeight="0.48826292" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -779,7 +793,8 @@
     <MESSAGE value="Finalizada la interfaz grafica agregada la clase modelo e incluidos los procesos predeterminados para el simulador." />
     <MESSAGE value="Finalizado los listener de los botones agregar,matar,bloquear y algoritmos a este ultimo falta implementarle los algoritmos." />
     <MESSAGE value="Agregado metodo FIFO version 1 (No toma en cuenta el quantum ni lo descuenta)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Agregado metodo FIFO version 1 (No toma en cuenta el quantum ni lo descuenta)" />
+    <MESSAGE value="Acomodado el FIFO, modificada la clase Proceso agregado el modulo de discuro duro y el CSCAN" />
+    <option name="LAST_COMMIT_MESSAGE" value="Acomodado el FIFO, modificada la clase Proceso agregado el modulo de discuro duro y el CSCAN" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -818,16 +833,27 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#CScan#0;class#Escritorio#0" expanded="false" />
-            <element signature="e#5333#10671#0" expanded="true" />
-            <element signature="e#10670#10671#0" expanded="true" />
-            <element signature="method#AsignarLabels#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#DeclararTabla_Disco#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#DeclararLabels_Disco#0;class#Escritorio#0" expanded="false" />
+            <element signature="e#5259#10598#0" expanded="true" />
+            <element signature="e#10597#10598#0" expanded="true" />
+            <element signature="e#29435#29706#0" expanded="true" />
+            <element signature="e#29705#29706#0" expanded="true" />
+            <element signature="e#30022#30287#0" expanded="true" />
+            <element signature="e#30286#30287#0" expanded="true" />
+            <element signature="e#30547#30818#0" expanded="true" />
+            <element signature="e#30817#30818#0" expanded="true" />
+            <element signature="e#31060#31334#0" expanded="true" />
+            <element signature="e#31333#31334#0" expanded="true" />
+            <element signature="e#31564#31837#0" expanded="true" />
+            <element signature="e#31836#31837#0" expanded="true" />
+            <element signature="e#32080#32349#0" expanded="true" />
+            <element signature="e#32348#32349#0" expanded="true" />
+            <element signature="e#32579#32838#0" expanded="true" />
+            <element signature="e#32837#32838#0" expanded="true" />
+            <element signature="e#33216#43607#0" expanded="true" />
+            <element signature="e#43606#43607#0" expanded="true" />
             <element signature="method#Fifo#0;class#Escritorio#0" expanded="false" />
             <element signature="method#BloquearProceso#0;class#Escritorio#0" expanded="false" />
             <element signature="method#MatarProcesos#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#ingresar#0;class#Escritorio#0" expanded="false" />
             <element signature="method#idquantum#0;class#Escritorio#0" expanded="false" />
           </folding>
         </state>
@@ -912,16 +938,27 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#CScan#0;class#Escritorio#0" expanded="false" />
-            <element signature="e#5333#10671#0" expanded="true" />
-            <element signature="e#10670#10671#0" expanded="true" />
-            <element signature="method#AsignarLabels#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#DeclararTabla_Disco#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#DeclararLabels_Disco#0;class#Escritorio#0" expanded="false" />
+            <element signature="e#5259#10598#0" expanded="true" />
+            <element signature="e#10597#10598#0" expanded="true" />
+            <element signature="e#29435#29706#0" expanded="true" />
+            <element signature="e#29705#29706#0" expanded="true" />
+            <element signature="e#30022#30287#0" expanded="true" />
+            <element signature="e#30286#30287#0" expanded="true" />
+            <element signature="e#30547#30818#0" expanded="true" />
+            <element signature="e#30817#30818#0" expanded="true" />
+            <element signature="e#31060#31334#0" expanded="true" />
+            <element signature="e#31333#31334#0" expanded="true" />
+            <element signature="e#31564#31837#0" expanded="true" />
+            <element signature="e#31836#31837#0" expanded="true" />
+            <element signature="e#32080#32349#0" expanded="true" />
+            <element signature="e#32348#32349#0" expanded="true" />
+            <element signature="e#32579#32838#0" expanded="true" />
+            <element signature="e#32837#32838#0" expanded="true" />
+            <element signature="e#33216#43607#0" expanded="true" />
+            <element signature="e#43606#43607#0" expanded="true" />
             <element signature="method#Fifo#0;class#Escritorio#0" expanded="false" />
             <element signature="method#BloquearProceso#0;class#Escritorio#0" expanded="false" />
             <element signature="method#MatarProcesos#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#ingresar#0;class#Escritorio#0" expanded="false" />
             <element signature="method#idquantum#0;class#Escritorio#0" expanded="false" />
           </folding>
         </state>
@@ -1018,16 +1055,27 @@
           <caret line="131" column="8" selection-start-line="131" selection-start-column="8" selection-end-line="131" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#CScan#0;class#Escritorio#0" expanded="false" />
-            <element signature="e#5333#10671#0" expanded="true" />
-            <element signature="e#10670#10671#0" expanded="true" />
-            <element signature="method#AsignarLabels#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#DeclararTabla_Disco#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#DeclararLabels_Disco#0;class#Escritorio#0" expanded="false" />
+            <element signature="e#5259#10598#0" expanded="true" />
+            <element signature="e#10597#10598#0" expanded="true" />
+            <element signature="e#29435#29706#0" expanded="true" />
+            <element signature="e#29705#29706#0" expanded="true" />
+            <element signature="e#30022#30287#0" expanded="true" />
+            <element signature="e#30286#30287#0" expanded="true" />
+            <element signature="e#30547#30818#0" expanded="true" />
+            <element signature="e#30817#30818#0" expanded="true" />
+            <element signature="e#31060#31334#0" expanded="true" />
+            <element signature="e#31333#31334#0" expanded="true" />
+            <element signature="e#31564#31837#0" expanded="true" />
+            <element signature="e#31836#31837#0" expanded="true" />
+            <element signature="e#32080#32349#0" expanded="true" />
+            <element signature="e#32348#32349#0" expanded="true" />
+            <element signature="e#32579#32838#0" expanded="true" />
+            <element signature="e#32837#32838#0" expanded="true" />
+            <element signature="e#33216#43607#0" expanded="true" />
+            <element signature="e#43606#43607#0" expanded="true" />
             <element signature="method#Fifo#0;class#Escritorio#0" expanded="false" />
             <element signature="method#BloquearProceso#0;class#Escritorio#0" expanded="false" />
             <element signature="method#MatarProcesos#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#ingresar#0;class#Escritorio#0" expanded="false" />
             <element signature="method#idquantum#0;class#Escritorio#0" expanded="false" />
           </folding>
         </state>
@@ -1152,16 +1200,27 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#CScan#0;class#Escritorio#0" expanded="false" />
-            <element signature="e#5333#10671#0" expanded="true" />
-            <element signature="e#10670#10671#0" expanded="true" />
-            <element signature="method#AsignarLabels#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#DeclararTabla_Disco#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#DeclararLabels_Disco#0;class#Escritorio#0" expanded="false" />
+            <element signature="e#5259#10598#0" expanded="true" />
+            <element signature="e#10597#10598#0" expanded="true" />
+            <element signature="e#29435#29706#0" expanded="true" />
+            <element signature="e#29705#29706#0" expanded="true" />
+            <element signature="e#30022#30287#0" expanded="true" />
+            <element signature="e#30286#30287#0" expanded="true" />
+            <element signature="e#30547#30818#0" expanded="true" />
+            <element signature="e#30817#30818#0" expanded="true" />
+            <element signature="e#31060#31334#0" expanded="true" />
+            <element signature="e#31333#31334#0" expanded="true" />
+            <element signature="e#31564#31837#0" expanded="true" />
+            <element signature="e#31836#31837#0" expanded="true" />
+            <element signature="e#32080#32349#0" expanded="true" />
+            <element signature="e#32348#32349#0" expanded="true" />
+            <element signature="e#32579#32838#0" expanded="true" />
+            <element signature="e#32837#32838#0" expanded="true" />
+            <element signature="e#33216#43607#0" expanded="true" />
+            <element signature="e#43606#43607#0" expanded="true" />
             <element signature="method#Fifo#0;class#Escritorio#0" expanded="false" />
             <element signature="method#BloquearProceso#0;class#Escritorio#0" expanded="false" />
             <element signature="method#MatarProcesos#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#ingresar#0;class#Escritorio#0" expanded="false" />
             <element signature="method#idquantum#0;class#Escritorio#0" expanded="false" />
           </folding>
         </state>
@@ -1363,20 +1422,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Escritorio.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.069587626">
-          <caret line="157" column="25" selection-start-line="157" selection-start-column="25" selection-end-line="157" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.23776224">
+          <caret line="1237" column="42" selection-start-line="1237" selection-start-column="42" selection-end-line="1237" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#CScan#0;class#Escritorio#0" expanded="false" />
-            <element signature="e#5333#10671#0" expanded="true" />
-            <element signature="e#10670#10671#0" expanded="true" />
-            <element signature="method#AsignarLabels#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#DeclararTabla_Disco#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#DeclararLabels_Disco#0;class#Escritorio#0" expanded="false" />
+            <element signature="e#5259#10598#0" expanded="true" />
+            <element signature="e#10597#10598#0" expanded="true" />
+            <element signature="e#29435#29706#0" expanded="true" />
+            <element signature="e#29705#29706#0" expanded="true" />
+            <element signature="e#30022#30287#0" expanded="true" />
+            <element signature="e#30286#30287#0" expanded="true" />
+            <element signature="e#30547#30818#0" expanded="true" />
+            <element signature="e#30817#30818#0" expanded="true" />
+            <element signature="e#31060#31334#0" expanded="true" />
+            <element signature="e#31333#31334#0" expanded="true" />
+            <element signature="e#31564#31837#0" expanded="true" />
+            <element signature="e#31836#31837#0" expanded="true" />
+            <element signature="e#32080#32349#0" expanded="true" />
+            <element signature="e#32348#32349#0" expanded="true" />
+            <element signature="e#32579#32838#0" expanded="true" />
+            <element signature="e#32837#32838#0" expanded="true" />
+            <element signature="e#33216#43607#0" expanded="true" />
+            <element signature="e#43606#43607#0" expanded="true" />
             <element signature="method#Fifo#0;class#Escritorio#0" expanded="false" />
             <element signature="method#BloquearProceso#0;class#Escritorio#0" expanded="false" />
             <element signature="method#MatarProcesos#0;class#Escritorio#0" expanded="false" />
-            <element signature="method#ingresar#0;class#Escritorio#0" expanded="false" />
             <element signature="method#idquantum#0;class#Escritorio#0" expanded="false" />
           </folding>
         </state>
